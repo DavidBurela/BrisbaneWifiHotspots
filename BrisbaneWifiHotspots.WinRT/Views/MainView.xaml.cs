@@ -2,29 +2,21 @@
 using Bing.Maps;
 using BrisbaneWifiHotspots.WinRT.Models;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace BrisbaneWifiHotspots.WinRT.Views
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
-    public sealed partial class MainView : Page
+    public sealed partial class MainView
     {
         public MainView()
         {
             this.InitializeComponent();
-        }
 
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.  The Parameter
-        /// property is typically used to configure the page.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
+            var sydneyLocation = new Location(-27.4610936817092, 153.07195080023348);
+            map.ZoomLevel = 12;
+            map.Center = sydneyLocation;
+            map.SetView(sydneyLocation);    // Workaround: There is an issue with the map. Images won't display until you move the map.
+
+            map.RightTapped += MapRightTapped;  // for debugging
         }
 
         private void LocationsListOnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -37,6 +29,13 @@ namespace BrisbaneWifiHotspots.WinRT.Views
                     map.SetView(new Location(clickedBeach.Latitude, clickedBeach.Longitude), 15);
                 }
             }
+        }
+
+        void MapRightTapped(object sender, Windows.UI.Xaml.Input.RightTappedRoutedEventArgs e)
+        {
+            // development helper, allows me to grab coordinates.
+            var coordinates = map.Center;
+            e.Handled = false; // still allow the app bar to come up.
         }
     }
 }

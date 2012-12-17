@@ -34,7 +34,7 @@
             </ListBox.ItemTemplate>
         </ListBox>
         <Maps:Map x:Name="map" Grid.Column="1" Credentials="{StaticResource BingMapsApiKey}">
-            <Maps:MapItemsControl ItemsSource="{Binding Locations}"  >
+            <Maps:MapItemsControl ItemsSource="{Binding Locations}" >
                 <Maps:MapItemsControl.ItemTemplate>
                     <DataTemplate>
                         <Maps:Pushpin ToolTipService.ToolTip="{Binding LocationName}" >
