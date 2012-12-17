@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using BrisbaneWifiHotspots.WinRT.Helpers;
 using BrisbaneWifiHotspots.WinRT.Models;
 
 namespace BrisbaneWifiHotspots.WinRT.ViewModels
 {
     public class MainViewModel
     {
-        public ObservableCollection<LocationData> Locations { get; set; }
+        public SortedObservableCollection<LocationData> Locations { get; set; }
 
         public MainViewModel()
         {
-            Locations = new ObservableCollection<LocationData>();
+            Locations = new SortedObservableCollection<LocationData>();
 
             PopulateLocationData();
         }
